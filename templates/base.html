@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" 
+      type="image/x-icon" 
+      href="{{ url_for('static', filename='images/logo/logo_tab.png') }}" >
+    <title>Easy Scrape</title>
+    <nav class = nav_container>
+        <div id="logo_container">
+            <a href="/">
+                <img class = "nav_logo"
+                    src="{{ url_for('static', filename='images/logo/logo_white.png') }}" 
+                    alt="Easy Scrape">
+            </a>
+        </div>
+        <div class="nav_page_container">
+            <a href="/" class="nav_page">Scrape</a>
+            <a href="/" class="nav_page">Instructions</a>
+            <a href="/" class="nav_page">About</a>
+        </div>
+    </nav>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
