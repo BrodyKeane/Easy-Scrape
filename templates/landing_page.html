@@ -6,10 +6,12 @@
             Free and easy web scraping 
         </h1>
         <p class="hero_text">
-            EasyScrape is a powerful and user-friendly web scraping tool that allows you to easily extract and collect data from any website. 
+            EasyScrape is a powerful and user-friendly web scraping tool that allows you to easily extract and collect data from any website.  
             With its simple and intuitive interface, you can easily navigate and select the data you need, without any prior technical knowledge or coding experience.
         </p>
-
+        <form action="{{ url_for('render_scrape') }}">
+            <button class="hero_btn">Get Started</button>
+        </form>
     </div>
     <ol class="guide_container">
         <li class="guide_step">

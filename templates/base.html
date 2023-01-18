@@ -19,9 +19,9 @@
             <p class="logo_title">EasyScrape</p>
         </a>
         <div class="nav_page_container">
-            <a href="/" class="nav_page">Scrape</a>
-            <a href="/" class="nav_page">Help</a>
-            <a href="/" class="nav_page">About</a>
+            <a href="{{ url_for('render_scrape') }}" class="nav_page">Scrape</a>
+            <a href="{{ url_for('render_help') }}" class="nav_page">Help</a>
+            <a href="{{ url_for('render_about') }}" class="nav_page">About</a>
         </div>
     </nav>
 </head>
