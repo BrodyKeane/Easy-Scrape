@@ -29,6 +29,7 @@ a {
 .page_container{
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
     background: rgb(16,11,0);
     background: linear-gradient(315deg, rgba(16,11,0,1) 10%,
                                         rgba(10,25,0,1) 68%,
@@ -92,18 +93,15 @@ a {
             }
 
 .content{
-    height: 100vh;
     flex: 1;
 }
 
 /* footer */
 footer{
-
     justify-self: flex-end;
-    margin-top: 8vh;
     width: 100%; 
     color: white;
-    padding: 10px;
+    margin: 1vh 0;
     font-size: 1rem;
 }
 
@@ -121,13 +119,14 @@ footer{
 /* landing page*/
 .landing_container{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin: 5vh 5vw 0 10vw;
     }
 
     .hero_container{
         align-items: center;
         margin-left: 5vw;
+        width: 40vw;
     }
 
 
@@ -142,7 +141,7 @@ footer{
 
         .hero_text{
             font-size: 1.5rem;
-            width: 50vw;
+ 
             
         }
 
@@ -161,7 +160,7 @@ footer{
         }
 
             .guide_icon{
-                width: 8vw;
+                width: 5vw;
                 
             }
 
@@ -170,11 +169,18 @@ footer{
                 font-size: 1.5rem;
                 width: 20vw;
                 color: #9ca1a5;
+                margin-bottom: 5vh;
             }
 
 @media (max-width: 900px){
     .landing_container{
         flex-direction: column;
+    }
+
+    .hero_container{
+        align-items: center;
+        margin-left: 5vw;
+        width: 80vw;
     }
     
     .guide_container{

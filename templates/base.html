@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" class="page_container">
+<html lang="en">
+<div class="page_container">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,8 +25,10 @@
         </div>
     </nav>
 </head>
-<body class="content">
+<body>
+    <div class="content">
     {% block content %}{% endblock %}
+    </div>
 </body>
 <footer>
     <div id="footer-container">
@@ -36,4 +39,5 @@
         </div>
     </div>
 </footer>
+</div>
 </html>
