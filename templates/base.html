@@ -9,17 +9,17 @@
     <link rel="icon" 
       type="image/x-icon" 
       href="{{ url_for('static', filename='images/logo/logo_tab.png') }}" >
-    <title>Easy Scrape</title>
+    <title>EasyScrape</title>
     <nav class = nav_container>
         <a href="/" id="logo_container">
             <img class = "nav_logo"
                 src="{{ url_for('static', filename='images/logo/logo_nav.png') }}" 
                 alt="Easy Scrape">
-            <p class="logo_title">Easy Scrape</p>
+            <p class="logo_title">EasyScrape</p>
         </a>
         <div class="nav_page_container">
             <a href="/" class="nav_page">Scrape</a>
-            <a href="/" class="nav_page">Instructions</a>
+            <a href="/" class="nav_page">Help</a>
             <a href="/" class="nav_page">About</a>
         </div>
     </nav>
@@ -27,4 +27,9 @@
 <body>
     {% block content %}{% endblock %}
 </body>
+<footer>
+    <div class="footer-container"> 
+        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+    </div>
+</footer>
 </html>
