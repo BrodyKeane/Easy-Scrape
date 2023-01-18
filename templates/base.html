@@ -11,13 +11,12 @@
       href="{{ url_for('static', filename='images/logo/logo_tab.png') }}" >
     <title>Easy Scrape</title>
     <nav class = nav_container>
-        <div id="logo_container">
-            <a href="/">
-                <img class = "nav_logo"
-                    src="{{ url_for('static', filename='images/logo/logo_white.png') }}" 
-                    alt="Easy Scrape">
-            </a>
-        </div>
+        <a href="/" id="logo_container">
+            <img class = "nav_logo"
+                src="{{ url_for('static', filename='images/logo/logo_nav.png') }}" 
+                alt="Easy Scrape">
+            <p class="logo_title">Easy Scrape</p>
+        </a>
         <div class="nav_page_container">
             <a href="/" class="nav_page">Scrape</a>
             <a href="/" class="nav_page">Instructions</a>
