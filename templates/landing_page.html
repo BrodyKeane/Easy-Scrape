@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="hero_container">
-    <h1 class="hero_title">
-        Free and easy <br> web scraping 
-    </h1>
-    <p class="hero_text">
-        EasyScrape is a free and powerful web scraping tool. 
-        Get all the data you need in just a few clicks.
-    </p>
+<div class="landing_container">
+    <div class="hero_container">
+        <h1 class="hero_title">
+            Free and easy web scraping 
+        </h1>
+        <p class="hero_text">
+            EasyScrape is a powerful and user-friendly web scraping tool that allows you to easily extract and collect data from any website. 
+            With its simple and intuitive interface, you can easily navigate and select the data you need, without any prior technical knowledge or coding experience.
+        </p>
+
+    </div>
+    <ol class="guide_container">
+        <li class="guide_step">
+            <img class="guide_icon" src="{{ url_for('static', filename='/images/icons/url.png') }}" alt="URL icon"> 
+            <p class="guide_text">Enter the site's URL</p>
+        </li>
+        <li class="guide_step">
+            <img class="guide_icon" src="{{ url_for('static', filename='/images/icons/html.png') }}" alt="HTML icon"> 
+            <p class="guide_text">Enter the html tag for the element</p>
+        </li>
+        <li class="guide_step">
+            <img class="guide_icon" src="{{ url_for('static', filename='/images/icons/download.png') }}" alt=""> 
+            <p class="guide_text">Save your data</p>
+        </li>
+    </ol>
 </div>
-<ol class="guide_container">
-    <li class="guide_step">
-        <img src="" alt=""> 
-        <p></p>
-    </li>
-</ol>
 {% endblock %}
