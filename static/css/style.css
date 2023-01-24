@@ -9,8 +9,9 @@
 
 body{
     background: rgb(16,11,0);
-    background: linear-gradient(315deg, rgba(16,11,0,1) 10%,
-                                        rgba(10,35,0,1) 70%,
+    background: linear-gradient(315deg, rgba(16,11,10,1) 10%,
+                                        rgba(10,35,0,1) 60%,
+                                        rgba(10,35,0,1) 80%,
                                         rgba(16,11,0,1) 90%);
 }
 

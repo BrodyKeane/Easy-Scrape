@@ -1,5 +1,7 @@
 from flask import Flask, render_template, url_for, redirect, request
 
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecretkey'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
