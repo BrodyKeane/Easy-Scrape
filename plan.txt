@@ -1,0 +1,21 @@
+-find containers
+-put data into dicts
+-return dicts
+
+-create table with suedo names for container tag and data tags
+-populate table from dicts
+-return table
+
+-when creating a new table drop the old table
+
+
+def get_table_from_scrape(self):
+    table = self._create_table()
+    containers = self._find_containers()
+    self._populate_table(table, containers)
+    return table
+
+def _create_table(self):
+    table = self.database.create_table(self.container_tag, self.data_tags)
+    db.create_all
+    return table
