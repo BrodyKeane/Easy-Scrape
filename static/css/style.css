@@ -8,17 +8,15 @@
 }
 
 body{
-    background: rgb(16,11,0);
-    background: linear-gradient(315deg, rgba(16,11,10,1) 10%,
-                                        rgba(10,35,0,1) 60%,
-                                        rgba(10,35,0,1) 80%,
-                                        rgba(16,11,0,1) 90%);
+    /* background: rgb(0,0,0);
+    background: linear-gradient(315deg, rgba(0,0,0,1) 20%, rgba(14,45,0,1) 50%, rgba(14,45,0,1) 70%, rgba(0,0,0,1) 95%); */
+    background: #043927;
 }
 
 * {
     box-sizing: border-box;
     font-family: var(--bs-font-sans-serif);
-    color: #f7f9f7;
+    color: #ffffff;
 }
 
 ul,
@@ -83,7 +81,7 @@ a {
 
         .nav_page {
             font-weight: bold;
-            color: #9ca1a5;
+            color: #c7c6c1;
             font-size: 1rem;
             font-family: "ITC Avant Garde Std Normal",sans-serif;
             line-height: 1.5;
@@ -93,7 +91,7 @@ a {
         }
 
             .nav_page:hover {
-                color: #358600;
+                color: #ffffff;
                 
             }
 
@@ -154,12 +152,12 @@ footer{
             height: 50px;
             cursor: pointer;
             text-transform: uppercase;
-            color: #f7f9f7;
+            color: #ffffff;
             font-family: "ITC Avant Garde Std Normal",sans-serif;
             font-size: 1rem;
             font-weight: bold;
-            background-color: #73b64f;
-            border: 2px solid #73b64f;
+            background-color: #499f68;
+            border: 2px solid #499f68;
             padding: 0 20px;
             line-height: 100%;
             align-items: center;
@@ -216,6 +214,19 @@ footer{
 }
 
 @media (max-width: 650px){
+    .nav_container{
+        padding: 0;
+    }
+
+    #logo_container{
+        width: 0;
+    }
+    
+    .nav_logo,
+    .logo_title{
+        display: none;
+    }
+
     .guide_container{
         flex-direction: column;
     }
@@ -229,7 +240,6 @@ footer{
         text-align: start;
         font-size: 1.5rem;
         flex: 1;
-        color: #9ca1a5;
         margin-left: 2vw;
     }
 }
