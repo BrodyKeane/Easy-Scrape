@@ -1,36 +1,5 @@
 import unittest
-from scrape import URLPermissionChecker, CorrelatedDataScraper
-
-class TestCorrelatedDataScraper(unittest.TestCase):
-    def test_result_success(self):
-        url = 'https://quotes.toscrape.com'
-        container_tag = '.quote'
-        data_tags = ['.author', '.text']
-        scraper = CorrelatedDataScraper(url, container_tag, data_tags)
-        rows = scraper.scrape()
-
-        author = 'J.K. Rowling'
-        text = '“It is our choices, Harry, that show what we truly are, far more than our abilities.”'
-        pseudo_row = {'.author': author, '.text': text}
-
-        self.assertEqual(rows[1], pseudo_row)
-
-    def test_result_success_with_limit(self):
-        url = 'https://books.toscrape.com'
-        container_tag = '.row > li'
-        data_tags = ['h3 a', '.price_color']
-        scraper = CorrelatedDataScraper(url, container_tag, data_tags, row_limit=2)
-        rows = scraper.scrape()
-
-        title = 'Tipping the Velvet'
-        price = 'Â£53.74'
-        pseudo_row = {'h3 a': title, '.price_color': price}
-
-        self.assertEqual(rows[1], pseudo_row)
-
-
-
-
+from source.verify_url import URLPermissionChecker
 
 class TestURLPermissionChecker(unittest.TestCase):
     def test_permission_to_scrape_from_root(self):
@@ -74,10 +43,3 @@ class TestURLPermissionChecker(unittest.TestCase):
         test_scrape = URLPermissionChecker(url)
         permission = test_scrape.can_scrape()
         self.assertEqual(permission, False)
-
-
-
-
-
-if __name__ == '__main__':
-    unittest.main()
