@@ -13,9 +13,20 @@ app.static_folder = 'static'
 def render_landing_page():
     return render_template('landing_page.html')
 
-@app.get('/scrape')
+
+@app.get('/scrape/')
 def render_scrape():
-    return render_template('scrape.html')
+    column_count = get_column_count()
+    print(column_count)
+    return render_template('scrape.html', column_count=column_count)
+
+def get_column_count():
+    column_count = request.args.get('column_count', default=2, type=int)
+    return column_count
+
+@app.post('/scrape/update_form_table')
+def update_form_table():
+    return redirect(url_for('render_scrape'))
 
 @app.get('/help')
 def render_help():

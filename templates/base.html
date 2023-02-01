@@ -6,11 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="icon" 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="icon"
       type="image/x-icon" 
       href="{{ url_for('static', filename='images/logo/logo_tab.png') }}" >
     <title>EasyScrape</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
     <nav class = nav_container>
         <a href="/" id="logo_container">
             <img class = "nav_logo"
@@ -24,10 +27,8 @@
             <a href="{{ url_for('render_about') }}" class="nav_page">About</a>
         </div>
     </nav>
-</head>
-<body>
     <div class="content">
-    {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
     </div>
 </body>
 <footer>

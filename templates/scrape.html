@@ -1,4 +1,32 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/scrape.css') }}">
+{% endblock %}
 
+{% block content %}
+<section id="scrape_table_container">
+    <form action="" class="url_form">
+        <label for="url" class="url_label label">URL:</label>
+        <input type="text" class="url_field field" name="url">
+    </form><br>
+    {% for column in range(column_count) %}
+    <form action="" class="column_form">
+        <label for="column_name" class="column_name_label label">Column Name:</label>
+        <input type="text" class="column_name_field field" name="column_name">
+
+        <label for="html_selector" class="html_selector_label label">html selector:</label>
+        <input type="text" class="html_selector_field field" name="html_selector">
+    </form>
+
+    <form action="{{ url_for('render_scrape') }}" method="GET" class="remove_column">
+        <input type="hidden" name="column_count" value="{{ column_count-1 }}">
+        <button type="submit" class="add_column">X</button>
+    </form><br>
+    {% endfor %}
+    
+    <form action="{{ url_for('render_scrape') }}" method="GET">
+        <input type="hidden" name="column_count" value="{{ column_count+1 }}">
+        <button type="submit" class="add_column">Add Column</button>
+    </form>
+</section>
 {% endblock %}

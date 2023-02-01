@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing_page.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="landing_container">
     <div class="hero_container">

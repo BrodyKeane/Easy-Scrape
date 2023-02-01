@@ -1,11 +1,16 @@
--find containers
--put data into dicts
--return dicts
+input
+-url
+-container ele
+-sub eles
 
--create table with suedo names for container tag and data tags
--populate table from dicts
--return table
+scrape button
 
--when creating a new table drop the old table
+output
+-container ele as title (renamable)
+-sub eles as columns (renameable)
+-each batch of sub eles as rows
 
 
+Recieve input
+-plug data into web scraper
+either return data or error
