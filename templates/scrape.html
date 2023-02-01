@@ -9,7 +9,7 @@
         <label for="url" class="url_label label">URL:</label>
         <input type="text" class="url_field field" name="url">
     </form><br>
-    {% for column in range(column_count) %}
+{% for column in range(column_count) %}
     <form action="" class="column_form">
         <label for="column_name" class="column_name_label label">Column Name:</label>
         <input type="text" class="column_name_field field" name="column_name">
@@ -22,7 +22,7 @@
         <input type="hidden" name="column_count" value="{{ column_count-1 }}">
         <button type="submit" class="add_column">X</button>
     </form><br>
-    {% endfor %}
+{% endfor %}
     
     <form action="{{ url_for('render_scrape') }}" method="GET">
         <input type="hidden" name="column_count" value="{{ column_count+1 }}">
