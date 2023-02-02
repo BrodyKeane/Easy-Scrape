@@ -1,10 +1,18 @@
 from flask import Flask, render_template, url_for, redirect, request
-from flask_sqlalchemy import SQLAlchemy
+
+from flask_caching import Cache
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'mysecretkey'
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+config = {
+    'SECRET_KEY': 'mysecretkey',
+    'SEND_FILE_MAX_AGE_DEFAULT': 0,
+    "DEBUG": True,        
+    "CACHE_TYPE": "SimpleCache",
+    "CACHE_DEFAULT_TIMEOUT": 1800,
+    "CACHE_THRESHOLD": 10000
+}
+app.config.from_mapping(config)
+cache = Cache(app)
 
 app.static_url_path = '/static'
 app.static_folder = 'static'
@@ -14,19 +22,52 @@ def render_landing_page():
     return render_template('landing_page.html')
 
 
-@app.get('/scrape/')
-def render_scrape():
-    column_count = get_column_count()
-    print(column_count)
-    return render_template('scrape.html', column_count=column_count)
+@app.get('/scrape_form/')
+def render_scrape_form():
+    url = cache.get("url") or ''
+    container = cache.get("containre") or ''
+    column_data = cache.get("column_data") or []
+    return render_template('scrape_form.html', url=url, container=container, column_data=column_data)
 
-def get_column_count():
-    column_count = request.args.get('column_count', default=2, type=int)
-    return column_count
+@app.post('/scrape_form/submit_url')
+def submit_url():
+    url = request.form.get('url')
+    cache.set("url", url)
+    return redirect(url_for('render_scrape_form'))
 
-@app.post('/scrape/update_form_table')
-def update_form_table():
-    return redirect(url_for('render_scrape'))
+@app.post('/scrape_form/submit_container')
+def submit_container():
+    container = request.form.get('container')
+    cache.set("container", container)
+    return redirect(url_for('render_scrape_form'))
+
+@app.post('/scrape_form/save_column')
+def save_column():
+    column_name = request.form.get('column_name', default='value not set')
+    html_selector = request.form.get('html_selector', default='value not set')
+    column_data = cache.get("column_data") or []
+    column_data.append({'column_name': column_name, 'html_selector': html_selector})
+    cache.set("column_data", column_data)
+    return redirect(url_for('render_scrape_form'))
+
+@app.post('/scrap_form/delete_column')
+def delete_column():
+    column_index = request.form.get('column_index')
+    column_index = int(column_index)
+    column_data = cache.get("column_data")
+    del column_data[column_index]
+    cache.set("column_data", column_data)
+    return redirect(url_for('render_scrape_form'))
+
+@app.post('/scrape_form/reset_form')
+def reset_form():
+    cache.clear()
+    return redirect(url_for('render_scrape_form'))
+
+@app.post('/scrape_form/scrape')
+def scrape():
+    return redirect(url_for('render_scrape_form'))
+
 
 @app.get('/help')
 def render_help():

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/scrape_form.css') }}">
+{% endblock %}
+
+{% block content %}
+<section id="scrape_table_container">
+    <form action="{{ url_for('submit_url') }}" method="POST" class="url_form">
+        <label for="url" class="url_label label">URL:</label>
+        <input type="text" placeholder="url for site" class="url_field field" name="url">
+        <button type="submit" class="submit">Submit</button>
+    </form><br>
+    <form action="{{ url_for('submit_container') }}" method="POST" class="container_form">
+        <label for="container" class="container_label label">Container:</label>
+        <input type="text" placeholder="parent to html selectors" class="container_field field" name="container">
+        <button type="submit" class="submit">Submit</button>
+    </form><br>
+    <table>
+        <tr>
+            <th>Column Name</th>
+            <th>Html Selector</th>
+            <th></th>
+        </tr>
+{% for column in column_data %}
+    <tr>
+        <td>{{ column['column_name'] }}</td>
+        <td>{{ column['html_selector'] }}</td>
+        <td>
+            <form action="{{ url_for('delete_column') }}" method="POST" class="remove_column">
+                <input type="hidden" name="column_index" value="{{ loop.index0 }}">
+                <button type="submit" class="remove_column">X</button>
+            </form>
+        </td>
+    </tr>
+{% endfor %}
+    </table>
+    <form action="{{ url_for('save_column') }}" method="POST" class="save_column_form">
+        <button type="submit" class="save_column">Add Column</button>
+        <input type="text" name="column_name" placeholder="name of column" class="column_name_field field">
+        <input type="text" name="html_selector" placeholder="html selector" class="html_selector_field field">
+    </form>
+    <form action="{{ url_for('reset_form') }}" method="POST" class="reset_form_form">
+        <button type="submit" class="reset_form">reset_form</button>
+    </form>
+    <form action="{{ url_for('scrape') }}" method="POST" class="scrape_form">
+        <button type="submit" class="scrape">Scrape</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,11 @@
+.field,
+button{
+    color: black;
+}
+
+.column_form,
+.remove_column,
+.reset_form_form,
+.scrape_form{
+    display: inline;
+}
