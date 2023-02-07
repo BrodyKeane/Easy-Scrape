@@ -7,7 +7,7 @@ class URLPermissionChecker:
     def __init__(self, url):
         self.url = url
         self.parsed_url = urlparse(url)
-        self.errors = []
+        self.error = None
 
     def can_scrape(self):
         can_scrape = (
@@ -23,7 +23,7 @@ class URLPermissionChecker:
         if self.parsed_url.scheme == "https":
             return True
         else:
-            self.errors.append('URL must start with https')
+            self.error = 'URL must start with https'
             return False
 
 
@@ -33,16 +33,20 @@ class URLPermissionChecker:
             gethostbyname(hostname)
             return True
         except:
-            self.errors.append('invalid URL format')
+            self.error = 'invalid URL format'
             return False
 
 
     def _is_accessible(self):
         try:
             res = get(self.url)
-            return res.status_code == 200
+            if res.status_code == 200:
+                return True
+            else:
+                self.error = 'URL could not be reached'
+                return False
         except:
-            self.errors.append('URL could not be reached')
+            self.error = 'URL could not be reached'
             return False
 
 
@@ -50,7 +54,7 @@ class URLPermissionChecker:
         robot_parser = self._parse_robots_txt()
         scrape_permission = robot_parser.is_allowed("User-agent", self.url)
         if not scrape_permission:
-            self.errors.append('Scraping permission denied by site owner.')
+            self.error = 'Scraping permission denied by site owner.'
         return scrape_permission
 
     def _parse_robots_txt(self):

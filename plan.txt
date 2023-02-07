@@ -18,3 +18,4 @@ either return data or error
 
 --todo--
 1.fix tab bar logo.
+2 fix landing page hero paragraph to better descripe database functionality.

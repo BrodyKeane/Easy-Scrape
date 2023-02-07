@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, redirect, request
 from flask_caching import Cache
 
 from source.verify_url import URLPermissionChecker
+from source.scrape import CorrelatedDataScraper, VerifyContainer
 
 app = Flask(__name__)
 config = {
@@ -24,8 +25,8 @@ def render_landing_page():
 
 
 @app.get('/url_form')
-def render_url_form(errors=None):
-    return render_template('url_form.html', errors=errors)
+def render_url_form():
+    return render_template('url_form.html', error=None)
 
 @app.post('/scrape_form/submit_url')
 def submit_url():
@@ -34,21 +35,27 @@ def submit_url():
     url_checker = URLPermissionChecker(url)
     url_verify = url_checker.can_scrape()
     if url_verify:
-        return redirect(url_for('render_scrape_form'))
+        return redirect(url_for('render_container_form'))
     else:
-        errors = url_checker.errors
-        return redirect(url_for('url_form.html'), errors=errors)
+        error = url_checker.error
+        return render_template('url_form.html', error=error)
+    
 
 @app.get('/container_form')
-def render_container_form():
-    pass
+def render_container_form(error=None):
+    return render_template('container_form.html', error=error)
 
 @app.post('/scrape_form/submit_container')
 def submit_container():
     container = request.form.get('container')
     cache.set("container", container)
-    return redirect(url_for('render_scrape_form'))
-
+    url = cache.get("url")
+    container_verifier = VerifyContainer(url, container)
+    if container_verifier.container_found():
+        return redirect(url_for('render_scrape_form'))
+    else:
+        error = 'container could not be found'
+        return redirect(url_for('render_container_form', error=error))
 
 
 @app.get('/scrape_form/')

@@ -1,23 +1,29 @@
 {% extends 'base.html' %}
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/scrape_form.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/url_form.css') }}">
 {% endblock %}
 
 {% block content %}
-<h1>First we need the url for the site you'de like to scrape</h1>
+<section id="url_form_container">
+    <h1>First we need the url for the site you want to scrape</h1>
 
-<form action="{{ url_for('submit_url') }}" method="POST" class="url_form">
-      <button type="submit" class="submit">Submit URL</button>
-      <input type="text" class="url_field field" name="url">
-  
-</form>
-<p>
-    -Url must start with https <br>
-    -Url have permission to be scraped from site owner. <br><br>
-    If you'de like to see if a url is allowed to be scraped you can go to any site <br>
-    and add /robots.txt to the url to see their blacklisted pages. <br>
-</p>
+    <form action="{{ url_for('submit_url') }}" method="POST" class="url_form">
+        <button type="submit" class="submit">Submit URL</button>
+        <input type="text" class="url_field field" name="url">
+    
+    </form>
 
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <p>
+        -Url must start with https <br>
+        -Url have permission to be scraped from site owner. <br><br>
+        If you'de like to see if a url is allowed to be scraped you can go to any site <br>
+        and add /robots.txt to the url to see their blacklisted pages. <br>
+    </p>
+</section>
 
 
 {% endblock %}

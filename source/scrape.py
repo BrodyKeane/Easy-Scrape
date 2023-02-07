@@ -45,6 +45,19 @@ class CorrelatedDataScraper:
     def remove_data_tag(self, tag):
         self.data_tags.remove(tag)
 
+class VerifyContainer:
+    def __init__(self, url, container):
+        self.url = url
+        self.container = container
+
+    def container_found(self):
+        response = get(self.url)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        container = soup.select_one(self.container_tag)
+        if container:
+            return True
+        return False
+
 
 
 
