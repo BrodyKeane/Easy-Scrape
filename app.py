@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, redirect, request
-
 from flask_caching import Cache
+
+from source.verify_url import URLPermissionChecker
 
 app = Flask(__name__)
 config = {
@@ -22,24 +23,40 @@ def render_landing_page():
     return render_template('landing_page.html')
 
 
-@app.get('/scrape_form/')
-def render_scrape_form():
-    url = cache.get("url") or ''
-    container = cache.get("containre") or ''
-    column_data = cache.get("column_data") or []
-    return render_template('scrape_form.html', url=url, container=container, column_data=column_data)
+@app.get('/url_form')
+def render_url_form(errors=None):
+    return render_template('url_form.html', errors=errors)
 
 @app.post('/scrape_form/submit_url')
 def submit_url():
     url = request.form.get('url')
     cache.set("url", url)
-    return redirect(url_for('render_scrape_form'))
+    url_checker = URLPermissionChecker(url)
+    url_verify = url_checker.can_scrape()
+    if url_verify:
+        return redirect(url_for('render_scrape_form'))
+    else:
+        errors = url_checker.errors
+        return redirect(url_for('url_form.html'), errors=errors)
+
+@app.get('/container_form')
+def render_container_form():
+    pass
 
 @app.post('/scrape_form/submit_container')
 def submit_container():
     container = request.form.get('container')
     cache.set("container", container)
     return redirect(url_for('render_scrape_form'))
+
+
+
+@app.get('/scrape_form/')
+def render_scrape_form():
+    url = cache.get("url") or ''
+    container = cache.get("containre") or ''
+    column_data = cache.get("column_data") or []
+    return render_template('scrape_form.html', url=url, container=container, column_data=column_data)
 
 @app.post('/scrape_form/save_column')
 def save_column():

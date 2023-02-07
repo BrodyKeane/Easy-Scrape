@@ -1,0 +1,12 @@
+<h1>Next we'll need the container element</h1>
+<form action="{{ url_for('submit_container') }}" method="POST" class="container_form">
+    <button type="submit" class="submit">Submit Container</button>
+    <input type="text" placeholder="parent to html selectors" class="container_field field" name="container">
+</form>
+<p>
+    The container element is the element that holds one of each the elements youd like to scrape. <br>
+    For instance if your were scraping data on movies you would give us the element that contains <br>
+    one individual movie. Not the entire list of movies. <br>
+    You will most likely have a class or id that you can use but if not, you can also use another <br>
+    css notation for referencing an element. <br>
+</p>

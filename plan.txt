@@ -14,3 +14,7 @@ output
 Recieve input
 -plug data into web scraper
 either return data or error
+
+
+--todo--
+1.fix tab bar logo.
